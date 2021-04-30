@@ -1,0 +1,10 @@
+name: flappwrite_water_tracker_scripts
+description: Script to create collections
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  dart_appwrite: ^0.4.0
