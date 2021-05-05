@@ -114,6 +114,12 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 20.0),
+            Text(
+              "Drink water,\nstay healthy,\nstay fit.".toUpperCase(),
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            const SizedBox(height: 20.0),
             Row(
               children: [
                 IconButton(
