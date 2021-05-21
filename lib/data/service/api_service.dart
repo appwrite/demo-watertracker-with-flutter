@@ -32,6 +32,10 @@ class ApiService {
     return _account.createSession(email: email, password: password);
   }
 
+  Future anonymousLogin() async {
+    return _account.createAnonymousSession();
+  }
+
   Future<bool> logout() async {
     try {
       await _account.deleteSessions();

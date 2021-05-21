@@ -75,6 +75,31 @@ class _LoginPageState extends State<LoginPage> {
               child: Text("Login"),
             ),
             const SizedBox(height: 10.0),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.grey.shade300,
+                onPrimary: Colors.black,
+              ),
+              onPressed: () async {
+                //login user
+                try {
+                  await ApiService.instance.anonymousLogin();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (_) => MainScreen()),
+                  );
+                } on AppwriteException catch (e) {
+                  //“One of the main causes of the fall of the Roman Empire was that lacking zero, they had no way to indicate successful termination of their C programs.”
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(e.message ?? "Error unknown"),
+                    ),
+                  );
+                }
+              },
+              child: Text("Login Anonymously"),
+            ),
+            const SizedBox(height: 10.0),
             TextButton(
               onPressed: () {
                 Navigator.push(
