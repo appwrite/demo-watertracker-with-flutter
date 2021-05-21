@@ -38,7 +38,7 @@ class ApiService {
 
   Future<bool> logout() async {
     try {
-      await _account.deleteSessions();
+      await _account.deleteSession(sessionId: 'current');
       return true;
     } on AppwriteException catch (e) {
       print(e.message);
