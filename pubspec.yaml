@@ -9,17 +9,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  appwrite: ^0.4.0
+  appwrite: ^0.6.0
   carousel_slider: ^4.0.0-nullsafety.0
   font_awesome_flutter: ^9.0.0
   intl: ^0.17.0
   liquid_progress_indicator_ns: ^1.0.0
-
-dependency_overrides:
-  appwrite:
-    git:
-      url: git@github.com:appwrite/sdk-for-flutter.git
-      ref: feat-null-safety-new
 
 dev_dependencies:
   flutter_test:
