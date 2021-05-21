@@ -1,7 +1,6 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:flappwrite_water_tracker/data/service/api_service.dart';
 import 'package:flutter/material.dart';
-import './signup.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -29,7 +28,7 @@ class _SignupPageState extends State<SignupPage> {
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
             Text(
-              "Login",
+              "Sign Up",
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline3,
             ),
