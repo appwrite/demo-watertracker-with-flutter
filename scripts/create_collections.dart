@@ -4,17 +4,18 @@ import 'package:dart_appwrite/models.dart';
 Client client = Client(endPoint: "https://demo.appwrite.io/v1")
     .setProject('607b7f4a080c8')
     .setKey(
-        "9e54ff666c7d6c79fa31e1dfc30ac2399bffbd42121170b0deaa5113102a1fa510ccde39cf3ebc102fe3b893c900e7c53ec7676c59f0be6c9f69b004172daff785f8a8d57cc0fda0657c674cb13d1d5ba0591239c9e2216ede1b5bbc52778eb19871e69201f07184f63d335eca6a070e2106ea74916eaff712608b595055b64e");
+        "f3a2ee0a40d4ae49e629bf96e4af6dba0343c16a69bf3dca5a123530da1f104ead1057cf33f2a4e21813d3e89a7bfd75de634c82da55925726f3b905fb9b16d60d39b80b0d09c6542c893586644640a111acbf8cf3803549fb30e1d8acfdde3f41afd2ddbd045891fc0ffb45120a54864c65886b8dd6f71e5eddc3e4f4fe510d");
 Database db = Database(client);
+final collectionId = 'intakes';
 void main() async {
   //create entries collection
   Collection collection;
   try {
-    collection = await getCollection('entries');
+    collection = await getCollection(collectionId);
   } on AppwriteException catch (e) {
     print(e.message);
   }
-  if (collection != null) {
+  if (collection == null) {
     await createCollection();
   } else {
     print("Collection Entries Already exists");
@@ -22,20 +23,26 @@ void main() async {
 }
 
 createCollection() async {
-  final collectionId = 'entries';
   final res = await db.createCollection(
     collectionId: collectionId,
-    name: 'Entries',
+    name: 'Intakes',
     permission: 'document',
     read: ['role:member'],
     write: ['role:member'],
   );
   await db.createStringAttribute(
-      collectionId: collectionId, key: 'user', size: 36, xrequired: true);
+      collectionId: collectionId, key: 'userId', size: 36, xrequired: true);
   await db.createIntegerAttribute(
       collectionId: collectionId, key: 'date', xrequired: true);
   await db.createIntegerAttribute(
       collectionId: collectionId, key: 'amount', xrequired: true);
+  await Future.delayed(Duration(seconds: 5));
+  await db.createIndex(
+      key: 'date_index',
+      attributes: ['date'],
+      collectionId: collectionId,
+      type: 'key',
+      orders: ['asc']);
   print(res.toMap());
   print("Collection Entries created");
 }

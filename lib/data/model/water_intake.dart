@@ -28,9 +28,9 @@ class WaterIntake {
 
   Map<String, dynamic> toMap() {
     return {
-      'amount': amount,
       'date': date.millisecondsSinceEpoch,
-      'user_id': userId,
+      'amount': amount,
+      'userId': userId,
     };
   }
 
@@ -38,7 +38,7 @@ class WaterIntake {
     return WaterIntake(
       amount: map['amount'],
       date: DateTime.fromMillisecondsSinceEpoch(map['date']),
-      userId: map['user_id'],
+      userId: map['userId'],
       id: map['\$id'],
     );
   }
