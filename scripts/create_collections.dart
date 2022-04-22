@@ -36,6 +36,8 @@ createCollection() async {
       collectionId: collectionId, key: 'date', xrequired: true);
   await db.createIntegerAttribute(
       collectionId: collectionId, key: 'amount', xrequired: true);
+    
+  // to make sure that attributes are ready
   await Future.delayed(Duration(seconds: 5));
   await db.createIndex(
       key: 'date_index',
