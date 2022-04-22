@@ -1,4 +1,5 @@
 import 'package:dart_appwrite/dart_appwrite.dart';
+import 'package:dart_appwrite/models.dart';
 
 Client client = Client(endPoint: "https://demo.appwrite.io/v1")
     .setProject('607b7f4a080c8')
@@ -7,17 +8,13 @@ Client client = Client(endPoint: "https://demo.appwrite.io/v1")
 Database db = Database(client);
 void main() async {
   //create entries collection
-  final collections = await getCollections();
-  bool exists = false;
-  if (collections != null) {
-    collections.forEach((collection) {
-      if (collection["name"] == "Entries") {
-        exists = true;
-        print(collection);
-      }
-    });
+  Collection collection;
+  try {
+    collection = await getCollection('entries');
+  } on AppwriteException catch (e) {
+    print(e.message);
   }
-  if (!exists) {
+  if (collection != null) {
     await createCollection();
   } else {
     print("Collection Entries Already exists");
@@ -25,44 +22,28 @@ void main() async {
 }
 
 createCollection() async {
-  final res = await db.createCollection(name: 'Entries', read: [
-    'role:member'
-  ], write: [
-    'role:member'
-  ], rules: [
-    {
-      "type": "text",
-      "key": "user",
-      "label": "User",
-      "default": "",
-      "array": false,
-      "required": true,
-    },
-    {
-      "type": "numeric",
-      "key": "date",
-      "label": "Date",
-      "default": "",
-      "array": false,
-      "required": true,
-    },
-    {
-      "type": "numeric",
-      "key": "amount",
-      "label": "Amount",
-      "default": "",
-      "array": false,
-      "required": true,
-    },
-  ]);
-  print(res.data);
+  final collectionId = 'entries';
+  final res = await db.createCollection(
+    collectionId: collectionId,
+    name: 'Entries',
+    permission: 'document',
+    read: ['role:member'],
+    write: ['role:member'],
+  );
+  await db.createStringAttribute(
+      collectionId: collectionId, key: 'user', size: 36, xrequired: true);
+  await db.createIntegerAttribute(
+      collectionId: collectionId, key: 'date', xrequired: true);
+  await db.createIntegerAttribute(
+      collectionId: collectionId, key: 'amount', xrequired: true);
+  print(res.toMap());
   print("Collection Entries created");
 }
 
-Future<List> getCollections() async {
+Future<Collection> getCollection(String collectionId) async {
   try {
-    final res = await db.listCollections();
-    return res.data["collections"];
+    final res = await db.getCollection(collectionId: collectionId);
+    return res;
   } on AppwriteException catch (e) {
     print(e);
     return null;

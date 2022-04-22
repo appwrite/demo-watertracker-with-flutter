@@ -1,4 +1,4 @@
-import 'package:flappwrite_water_tracker/data/model/user.dart';
+import 'package:appwrite/models.dart';
 import 'package:flappwrite_water_tracker/data/service/api_service.dart';
 import 'package:flappwrite_water_tracker/pages/home.dart';
 import 'package:flappwrite_water_tracker/pages/login.dart';

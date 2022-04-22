@@ -1,8 +1,8 @@
 import 'package:appwrite/appwrite.dart';
+import 'package:appwrite/models.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flappwrite_water_tracker/data/model/user.dart';
 import 'package:flappwrite_water_tracker/data/model/water_intake.dart';
 import 'package:flappwrite_water_tracker/data/service/api_service.dart';
 import 'package:flappwrite_water_tracker/main.dart';
@@ -190,14 +190,14 @@ class _HomePageState extends State<HomePage> {
     final data = WaterIntake(
       amount: amount,
       date: DateTime.now(),
-      userId: widget.user.id,
+      userId: widget.user.$id,
       id: "",
     );
     try {
-      final intake = await ApiService.instance.addIntake(
+      await ApiService.instance.addIntake(
         intake: data,
-        read: ['user:${widget.user.id}'],
-        write: ['user:${widget.user.id}'],
+        read: ['user:${widget.user.$id}'],
+        write: ['user:${widget.user.$id}'],
       );
       _getIntakes();
     } on AppwriteException catch (e) {
