@@ -15,6 +15,7 @@ dependencies:
   intl: ^0.17.0
   liquid_progress_indicator_ns: ^1.0.0
   flutter_svg: ^1.0.3
+  url_launcher: ^6.1.0
 
 dev_dependencies:
   flutter_test:

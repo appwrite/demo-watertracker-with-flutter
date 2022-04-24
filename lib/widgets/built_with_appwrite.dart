@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BuiltWithAppwriteWrapper extends StatelessWidget {
   const BuiltWithAppwriteWrapper({Key? key, required this.child})
@@ -14,7 +15,13 @@ class BuiltWithAppwriteWrapper extends StatelessWidget {
             child: child,
           ),
           const SizedBox(height: 10.0),
-          SvgPicture.asset('assets/built-with-appwrite-hr.svg'),
+          GestureDetector(
+              onTap: () {
+                try {
+                  launchUrl(Uri.parse('https://appwrite.io'));
+                } catch (e) {}
+              },
+              child: SvgPicture.asset('assets/built-with-appwrite-hr.svg')),
           const SizedBox(height: 10.0),
         ],
       ),
