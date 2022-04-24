@@ -3,6 +3,7 @@ import 'package:flappwrite_water_tracker/data/service/api_service.dart';
 import 'package:flappwrite_water_tracker/pages/home.dart';
 import 'package:flappwrite_water_tracker/pages/login.dart';
 import 'package:flappwrite_water_tracker/pages/splash.dart';
+import 'package:flappwrite_water_tracker/widgets/built_with_appwrite.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -27,15 +28,9 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Colors.blue,
           ),
-          textTheme: TextTheme(
-            headline6: TextStyle(
-              color: Colors.blue,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
         ),
       ),
-      home: MainScreen(),
+      home: BuiltWithAppwriteWrapper(child: MainScreen()),
     );
   }
 }
