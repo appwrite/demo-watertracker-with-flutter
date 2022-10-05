@@ -49,7 +49,6 @@ class _HistoryPageState extends State<HistoryPage> {
                 padding: const EdgeInsets.all(16.0),
                 children: <Widget>[
                   ...intakes.map((intake) {
-                    //“Software undergoes beta testing shortly before it’s released. Beta is Latin for still doesn’t work.”
                     return ListTile(
                       title: Text("${intake.amount} ml"),
                       subtitle: Text(
